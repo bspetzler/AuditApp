@@ -1,26 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Audit from './Audit/Audit';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//import FilterableList from './FilterableList/FilterableList';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      Result: null,
+    };
+  }
+
+  updateResult(res) {
+    this.setState({
+      result: res,
+    })
+  }
+
+  /*
+  updateSearchTerm(term) {
+    this.setState({
+      searchTerm: term
+    })
+  }
+
+  updateFilterOption(option) {
+    this.setState({
+      filterOption: option
+    })
+  }
+  */
+
+  render() {
+    return (
+      <div className="App">
+        {
+        //<Graph />
+        /*<FilterableList
+          files={this.props.files}  
+          searchTerm={this.state.searchTerm}
+          filterOption={this.state.filterOption}/> 
+          */}
+        <Audit 
+          cats={this.props.cats}
+          locs={this.props.locs}
+          handleUpdate={term=>this.updateResult(term)}
+          auditResult={this.state.result} 
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
