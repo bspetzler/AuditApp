@@ -12,9 +12,9 @@ class Graph extends Component {
   render() {
     const poo= 'Subject';
 
-    console.log(this.props.data.locPass)
-    console.log(this.props.loc)
-    console.log(this.props.cat)
+    //console.log(this.props.data.catPass)
+    //console.log(this.props.loc)
+    //console.log(this.props.cat)
     const options = {
       title: {
         text: "Passes in Subjects"

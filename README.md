@@ -1,68 +1,45 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- # Audit App-->
+# Audit App MVP Project Proposal
 
-## Available Scripts
+Create a PASS/FAIL checklist for Quality to check the relevent processes at different locations, displayed as a grid checklist.
+Each checklist is saved to a server with a time stamp.
+Collected data can be graphed using a selection of multiple different variables.
+    Variables include time (with range), category/categories, location/locations.
 
-In the project directory, you can run:
+## Problem
 
-### `npm start`
+It's difficult to do simple pass fail/audits and log the data accessibly for analysis.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<!-- ![Screenshot](img/Recipe-API-Screenshot.png) -->
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## User Stories
 
-### `npm test`
+### New Users
+1. I want to use a checklist to check the performance for difference processes at different locations
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Returning Users
+2. I want to pareto the performance of all categories over all time
+3. I want to pareto the performance of all locations over a specific period of time
+4. I want to graph the performance of a specific category for all locations over time
+5. I want to graph the performance of a specific location for all processes over a specific period of time
+6. I want to graph the performance of a specific process at a specific location over a specific period of time
+7. I want to graph the performance of a specific location for a specific process over a specific period of time
 
-### `npm run build`
+### Admin/Feature Iterations
+8. I want to change my category names
+9. I want to add a location
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## User Flows
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+https://docs.google.com/spreadsheets/d/1V0h37uteAPObepL9L2QCYie4t_zAdIZDjwaZQSXbUdE/edit#gid=0
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Technology
 
-### `npm run eject`
+* HTML
+* CSS
+* JavaScript
+* jQuery
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Link
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Attribution
