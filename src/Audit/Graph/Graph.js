@@ -1,7 +1,7 @@
 import React from 'react'
 import { ResponsiveBar } from '@nivo/bar'
 
-import data from './data'
+//import data from './data'
 import config from './config'
 
 import './chart.css'
@@ -17,8 +17,8 @@ class Graph extends React.Component {
         'Subject': this.props.cats[i].Subject,
         "Failed Audits": 0,
         "Failed AuditsColor": "hsl(110, 70%, 50%)",
+      })),
       display: 'none'
-      }))
       /*[
         {
             "Subject": "SPC",
@@ -71,13 +71,13 @@ class Graph extends React.Component {
     for (let i=0; i<graphData.length; i++){ // iterate through each element of the response data array
       for (let j=0; j<graphData[0].prodData.length; j++){ // iterate through the prodData array in each element
         //console.log(graphData[i].prodData[j].checked);
-        if (graphData[i].prodData[j].checked == 'red'){
+        if (graphData[i].prodData[j].checked === 'red'){
           //console.log('yeah its red');
           for (let c=0; c<this.props.cats.length; c++){ // iterate through the categories to see which category is checked 'red' per the line above
           /*console.log(graphData[i].prodData[j].cata.Subject);
           console.log(this.props.cats[c].Subject);
           console.log(falseCatData.catFails[c]);*/
-            if (graphData[i].prodData[j].cata.Subject == this.props.cats[c].Subject) {
+            if (graphData[i].prodData[j].cata.Subject === this.props.cats[c].Subject) {
               catFails[c] = catFails[c]+1;
               //console.log(falseCatData.catFails[c]);
             }
@@ -93,7 +93,8 @@ class Graph extends React.Component {
     
     console.log(falseCatData); // EXPORT DATA INTO FORMAT SO THE GRAPH CAN USE IT////////////
     this.setState({
-      Result: falseCatData
+      Result: falseCatData,
+      display: 'there'
     })
   }
 
@@ -120,7 +121,9 @@ class Graph extends React.Component {
   }
 
   backToGrid = () =>{
-
+    this.setState({
+      display: 'none'
+    })
   }
   
 
@@ -133,20 +136,17 @@ class Graph extends React.Component {
   //let derp = collection.where("state", "==", "CA");*/
 
     render() {
-      console.log(this.state.Result);
-      //const db = firebase.firestore();
-      // Create a reference to the 'production-data' collection
-      //let collection = db.collection('production-data');
-      //console.log(this.props.data); // FIND OUT WHY GRAPH BUTTON WILL NOT REFRESH SUBMITTED VALUES AFTER THE FIRST TIME
-      //console.log(data);
-        return (
-            <div className='graph'>
-              <div className='graph-button'>
-                <input className='poo' type='submit' value='Graph' onClick={() => this.getData()}/>
-              </div>
-              <div className="chart">
+      console.log(this.state.display);
+      let dis = this.state.display;
+      let stuff;
+      if (dis === 'none'){
+        stuff = <div className='graph-button'>
+                  <input className='poo' type='submit' value='Graph' onClick={() => this.getData()}/>
+                </div>
+      } else {
+        stuff = <div className="chart">
                 <div className='backToGrid'>
-                  <input className='poo' type='submit' value='Poopshit' onClick={() => this.backToGrid()}/>
+                  <input className='poo' type='submit' value='Back To Grid' onClick={() => this.backToGrid()}/>
                 </div>
                 <ResponsiveBar
                     data={this.state.Result}
@@ -172,6 +172,15 @@ class Graph extends React.Component {
                     legends={config.legends}
                 />
               </div>
+      }
+      //const db = firebase.firestore();
+      // Create a reference to the 'production-data' collection
+      //let collection = db.collection('production-data');
+      //console.log(this.props.data); // FIND OUT WHY GRAPH BUTTON WILL NOT REFRESH SUBMITTED VALUES AFTER THE FIRST TIME
+      //console.log(data);
+        return (
+            <div className='graph'>
+              {stuff}
             </div>
         )
     }

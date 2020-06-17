@@ -5,12 +5,13 @@
 .graph{
   position: relative;
   width: 800px;
+  margin-left: 10px;
 }
 
 .chart {
   margin-top: 30px;
-  height:800px;
-  width:800px;
+  height:900px;
+  width:900px;
   background: white;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
@@ -23,7 +24,7 @@
 
 .graph-button{
   position: absolute;
-  top: 1118px;
+  top: 1148px;
   height: 50px;
   width: 150px;
   left: 90px;
@@ -35,7 +36,7 @@
 
 .backToGrid{
   position: absolute;
-  top: 100px;
+  top: 10px;
   height: 50px;
   width: 150px;
   left: -150px;

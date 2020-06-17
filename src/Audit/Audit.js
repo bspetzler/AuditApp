@@ -3,12 +3,27 @@ import './Audit.css';
 import CheckboxGrid from './CheckboxGrid/CheckboxGrid';
 import Graph from './Graph/Graph';
 
-import firestore from "./Firestore";
-import firebase from 'firebase';
-
 class Audit extends Component {
   static deafultProps = {
     grid: []
+  }
+
+  handleUpdate = () =>{
+    const cat = this.props.cats.length;
+    const loc = this.props.locs.length;
+    let gr = new Array(loc*cat);
+    
+    for (let sqr=0; sqr<loc*cat; sqr++){
+      for (let i=0; i<loc; i++){
+
+        for (let j=0; j<cat; j++){ 
+          gr[sqr] = {top: i*100, left: j*100, key: sqr, cata: this.props.cats[j], loca: this.props.locs[i], checked: 'white'};
+          sqr++
+            //<div className='checkbox' style={{top: i*2, left: j*2 }}></div>;
+        }
+      }
+    }
+    return gr;
   }
 
 
@@ -37,11 +52,12 @@ class Audit extends Component {
           cats={this.props.cats}
           locs={this.props.locs}
           checks={gr}
-          handleUpdate={this.props.handleUpdate}
+          handleUpdate={this.handleUpdate()}
         />
         
         <Graph
-        cats={this.props.cats}/>
+        cats={this.props.cats}
+        />
       </div>
     ); 
   }
