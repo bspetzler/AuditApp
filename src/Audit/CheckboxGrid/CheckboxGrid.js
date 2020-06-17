@@ -3,9 +3,9 @@ import './CheckboxGrid.css';
 import Checkbox from './Checkbox/Checkbox';
 import Categories from './Categories/Categories';
 import Locations from './Locations/Locations';
-import Graph from '../Graph/Graph';
 import firestore from "../Firestore";
 import firebase from 'firebase';
+//import Timestamp from '../react-timestamp/dist';
 
 class CheckboxGrid extends Component {
   state = {
@@ -57,6 +57,7 @@ class CheckboxGrid extends Component {
           //console.log('loc iter');
           if(this.state.checkboxes[i].loca===this.props.locs[loc]){
             //console.log('loc got one');
+            console.log(new Date());
             locFail[loc] = locFail[loc]+1;
           }
         }
@@ -99,20 +100,21 @@ class CheckboxGrid extends Component {
     e.preventDefault();
     console.log('I submitted!!');
     const db = firebase.firestore();
-    /*db.settings({
-      timestampsInSnapshots: true
-    });*/
-    const userRef = db.collection('production-data').add({
-      categories: this.state.catFail,
-      locations: this.state.locFail,
-      prodData: this.state.checkboxes
+
+    db.collection('production-data').add({
+      //categories: this.state.catFail,
+      //locations: this.state.locFail,
+      prodData: this.state.checkboxes,
+      dateTime: new Date(),
+      testMVP: 'x',
     });
     this.setState({
       locPass: [],
       catPass: [],
       locFail: [],
       catFail: [],
-      checkboxes: [{"top":0,"left":0,"key":0,"cata":{"Subject":"SPC"},"loca":{"Machine":"crazy stuff"},"checked":"white"},{"top":0,"left":50,"key":1,"cata":{"Subject":"Inspection"},"checked":"white"},{"top":0,"left":100,"key":2,"cata":{"Subject":"Dirty Stuff"},"checked":"white"},{"top":0,"left":150,"key":3,"cata":{"Subject":"Poopsosod"},"checked":"white"},{"top":0,"left":200,"key":4,"cata":{"Subject":"5"},"checked":"white"},{"top":50,"left":0,"key":5,"loca":{"Machine":"2"},"checked":"white"},{"top":50,"left":50,"key":6,"checked":"white"},{"top":50,"left":100,"key":7,"checked":"white"},{"top":50,"left":150,"key":8,"checked":"white"},{"top":50,"left":200,"key":9,"checked":"white"},{"top":100,"left":0,"key":10,"loca":{"Machine":"3"},"checked":"white"},{"top":100,"left":50,"key":11,"checked":"white"},{"top":100,"left":100,"key":12,"checked":"white"},{"top":100,"left":150,"key":13,"checked":"white"},{"top":100,"left":200,"key":14,"checked":"white"},{"top":150,"left":0,"key":15,"loca":{"Machine":"4"},"checked":"white"},{"top":150,"left":50,"key":16,"checked":"white"},{"top":150,"left":100,"key":17,"checked":"white"},{"top":150,"left":150,"key":18,"checked":"white"},{"top":150,"left":200,"key":19,"checked":"white"},{"top":200,"left":0,"key":20,"loca":{"Machine":"5"},"checked":"white"},{"top":200,"left":50,"key":21,"checked":"white"},{"top":200,"left":100,"key":22,"checked":"white"},{"top":200,"left":150,"key":23,"checked":"white"},{"top":200,"left":200,"key":24,"checked":"white"}],
+      checkboxes: this.props.checks,
+      //checkboxes: [{"top":0,"left":0,"key":0,"cata":{"Subject":"SPC"},"loca":{"Machine":"crazy stuff"},"checked":"white"},{"top":0,"left":50,"key":1,"cata":{"Subject":"Inspection"},"checked":"white"},{"top":0,"left":100,"key":2,"cata":{"Subject":"Dirty Stuff"},"checked":"white"},{"top":0,"left":150,"key":3,"cata":{"Subject":"Poopsosod"},"checked":"white"},{"top":0,"left":200,"key":4,"cata":{"Subject":"5"},"checked":"white"},{"top":50,"left":0,"key":5,"loca":{"Machine":"2"},"checked":"white"},{"top":50,"left":50,"key":6,"checked":"white"},{"top":50,"left":100,"key":7,"checked":"white"},{"top":50,"left":150,"key":8,"checked":"white"},{"top":50,"left":200,"key":9,"checked":"white"},{"top":100,"left":0,"key":10,"loca":{"Machine":"3"},"checked":"white"},{"top":100,"left":50,"key":11,"checked":"white"},{"top":100,"left":100,"key":12,"checked":"white"},{"top":100,"left":150,"key":13,"checked":"white"},{"top":100,"left":200,"key":14,"checked":"white"},{"top":150,"left":0,"key":15,"loca":{"Machine":"4"},"checked":"white"},{"top":150,"left":50,"key":16,"checked":"white"},{"top":150,"left":100,"key":17,"checked":"white"},{"top":150,"left":150,"key":18,"checked":"white"},{"top":150,"left":200,"key":19,"checked":"white"},{"top":200,"left":0,"key":20,"loca":{"Machine":"5"},"checked":"white"},{"top":200,"left":50,"key":21,"checked":"white"},{"top":200,"left":100,"key":22,"checked":"white"},{"top":200,"left":150,"key":23,"checked":"white"},{"top":200,"left":200,"key":24,"checked":"white"}],
       // need to make the checkboxes reset more universal, PLACEHOLDER FOR NOW
     });
   };
@@ -128,10 +130,10 @@ class CheckboxGrid extends Component {
   
   render() {
     const locations = this.props.locs
-      .map((file, key) => <Locations {...file} key={key} pos={this.props.checks[key].left+17}/>);
+      .map((file, key) => <Locations {...file} key={key} pos={this.props.checks[key*this.props.cats.length].top+37}/>);
     
     const categories = this.props.cats
-      .map((file, key) => <Categories {...file} key={key} pos={this.props.checks[key].left+17} />);
+      .map((file, key) => <Categories {...file} key={key} pos={this.props.checks[key].left+47} />);
     let data = this.props.checks.map((value, id) => 
       <Checkbox
       ref={this.CheckboxElement}
@@ -150,16 +152,20 @@ class CheckboxGrid extends Component {
     
     return (
       <div className='grid'>
-        {locations}
-        {categories}
-        {data}
-        <Graph 
-        data={this.state}
-        cat={this.props.cats}
-        loc={this.props.locs}
-        />
+        <div className='location-labels'>
+          {locations}
+        </div>
+        
+        <div className='category-labels'>
+          {categories}
+        </div>
+        <div className='checkbox-grid'>
+          {data}
+        </div>
+        
+        
         <form onSubmit={this.addCheckData}>
-          <input className='save' type='submit' value='Done' onClick={() => this.updateGrid()}/>
+          <input className='save' type='submit' value='Submit' onClick={() => this.updateGrid()}/>
         </form>
       </div>
     );
