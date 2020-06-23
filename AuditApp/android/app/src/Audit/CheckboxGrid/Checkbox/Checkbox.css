@@ -1,0 +1,9 @@
+.checkbox{
+    position: absolute;
+    height: 90px;
+    width: 90px;
+    border-width: 2px;
+    border-color: black;
+    background-color: white;
+    border-radius: 5px;
+}
